@@ -34,7 +34,7 @@ if (pertenceFibonacci(numero)) {
 
 // ----------------------------------
 
-import * as fs from "fs";
+import * as fs from "fs"; // Erro no ESLint por não haver a configuração do TypeScript
 
 interface FaturamentoData {
   faturamento_diario: number[];
