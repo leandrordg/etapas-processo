@@ -1,4 +1,10 @@
-let INDICE = 13, SOMA = 0, K = 0;
+/*
+  Para fazer os testes, utilizei o link a seguir: https://www.typescriptlang.org/
+*/
+
+let INDICE = 13,
+  SOMA = 0,
+  K = 0;
 
 while (K < INDICE) {
   K = K + 1;
@@ -28,7 +34,7 @@ if (pertenceFibonacci(numero)) {
 
 // ----------------------------------
 
-import * as fs from 'fs';
+import * as fs from "fs";
 
 interface FaturamentoData {
   faturamento_diario: number[];
@@ -41,27 +47,32 @@ interface Resultados {
 }
 
 function calcularFaturamento(faturamentoDiario: number[]): Resultados {
-  const diasValidos = faturamentoDiario.filter(faturamento => faturamento > 0);
-  
+  const diasValidos = faturamentoDiario.filter(
+    (faturamento) => faturamento > 0
+  );
+
   if (diasValidos.length === 0) {
     return { menor_faturamento: 0, maior_faturamento: 0, dias_acima_media: 0 };
   }
 
-  const mediaFaturamento = diasValidos.reduce((acc, val) => acc + val, 0) / diasValidos.length;
+  const mediaFaturamento =
+    diasValidos.reduce((acc, val) => acc + val, 0) / diasValidos.length;
 
   return {
     menor_faturamento: Math.min(...diasValidos),
     maior_faturamento: Math.max(...diasValidos),
-    dias_acima_media: diasValidos.filter(faturamento => faturamento > mediaFaturamento).length
+    dias_acima_media: diasValidos.filter(
+      (faturamento) => faturamento > mediaFaturamento
+    ).length,
   };
 }
 
-fs.readFile('faturamento.json', 'utf8', (err, data) => {
+fs.readFile("faturamento.json", "utf8", (err, data) => {
   if (err) {
-    console.error('Erro ao ler o arquivo:', err);
+    console.error("Erro ao ler o arquivo:", err);
     return;
   }
-  
+
   const faturamentoData: FaturamentoData = JSON.parse(data);
   const resultados = calcularFaturamento(faturamentoData.faturamento_diario);
 
@@ -75,18 +86,21 @@ interface Faturamento {
 }
 
 const faturamentoMensal: Faturamento = {
-  "SP": 67836.43,
-  "RJ": 36678.66,
-  "MG": 29229.88,
-  "ES": 27165.48,
-  "Outros": 19849.53
+  SP: 67836.43,
+  RJ: 36678.66,
+  MG: 29229.88,
+  ES: 27165.48,
+  Outros: 19849.53,
 };
 
 function calcularPercentualRepresentacao(faturamento: Faturamento) {
-  const totalFaturamento = Object.values(faturamento).reduce((acc, valor) => acc + valor, 0);
+  const totalFaturamento = Object.values(faturamento).reduce(
+    (acc, valor) => acc + valor,
+    0
+  );
 
   console.log(`Faturamento Total: R$ ${totalFaturamento.toFixed(2)}`);
-  
+
   for (const estado in faturamento) {
     const percentual = (faturamento[estado] / totalFaturamento) * 100;
     console.log(`${estado}: ${percentual.toFixed(2)}%`);
@@ -98,7 +112,7 @@ calcularPercentualRepresentacao(faturamentoMensal);
 // -----------------------------
 
 function inverterString(str: string): string {
-  let resultado = '';
+  let resultado = "";
   for (let i = str.length - 1; i >= 0; i--) {
     resultado += str[i];
   }
